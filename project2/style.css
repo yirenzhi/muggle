@@ -1,0 +1,15 @@
+.art {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box {
+    border: 5px solid black;
+}
+.box1 {
+    width: 200px;
+    height: 200px;
+    background: #e80605;
+}

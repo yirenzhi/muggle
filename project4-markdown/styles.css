@@ -1,0 +1,25 @@
+body{
+    background-color: black;
+    margin: 0px;
+}
+
+.pad{
+    display: flex;
+    background-color: cadetblue;
+    width:100vw;
+    height: 100vh;
+}
+
+.left{
+    padding: 20px;
+    /* white-space: pre-wrap;
+    white-space: pre-line;  */
+    width: 50vw;
+    background-color: cornflowerblue;
+}
+
+.right{
+    width: 50vw;
+    background-color: dimgrey;
+    padding: 20px;
+}

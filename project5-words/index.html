@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js-word</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="congrats.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="outer">
+        <div class="counter"></div>
+        <div class="sink"></div>
+        <div class="result"></div>
+        <div class="submit btn">submit</div>
+        <div class="reload btn">reload</div>
+        <div class="given"></div>
+    </div>
+    <script>
+        var words = ['hello', 'world', 'test', 'morning', 'good']
+        var $given = $('.given')
+        var $sink = $('.sink')
+        var $submit = $('.submit')
+        var $result = $('.result')
+        var $reload = $('.reload')
+        var score = 0
+        showScene()
+        function showScene() {
+            $('.counter').html(`得分：${score}`)
+            var word = words.pop()
+
+
+            var sortword = word.split('').sort(function (a, b) {
+                return a.localeCompare(b)
+            }).join('')
+
+            
+            $reload.hide()
+            $sink.css({
+                'width': word.length * 60
+            })
+            // for (var char of sortword) {
+            //     $given.append(`<div class="char">${char}</div>`)
+            // }
+            for(var char='a', i=0;i<4;i++)
+            {
+                $given.append(`<div class="char" id="${i}">${char}</div>`)
+            }
+            $('.char').click(function () {
+
+                if ($(this).parent().attr('class') == $given.attr('class')) {
+                    $(this).appendTo($sink)
+                }
+                else {
+                    $(this).appendTo($given)
+                }
+                alert($sink.children().eq(0).attr('id'))
+               
+            })
+            $submit.click(function () {
+                if ($given.children().length > $sink.children.length) {
+                    alert('格子未填满')
+                    return;
+                }
+
+                if ($sink.text() == word) {
+                    //alert('yes')
+                    $result.append('恭喜你，答对了')
+                    confetti.start()
+                    score++
+                    $('.counter').html(`得分：${score}`)
+                }
+                else {
+                    $result.append('答错了')
+                }
+                $reload.show()
+                $submit.hide()
+            })
+            $reload.click(function () {
+                $result.empty()
+                $given.empty()
+                $sink.empty()
+                confetti.stop()
+                $reload.hide()
+                $submit.show()
+                $reload.unbind()
+                $submit.unbind()
+                showScene()
+
+            })
+        }
+
+    </script>
+</body>
+
+</html>

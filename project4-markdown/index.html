@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>markdown</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="pad">
+        <div id="drawBoard" class="left" contenteditable="true"></div>
+        <div class="right"></div>
+    </div>
+    <script>
+        function showMark() {
+            marked.setOptions({ breaks: true }) //设置换行
+            $('.left').sortable()
+
+            //var word = $("#drawBoard").text()
+            var word = document.querySelector("#drawBoard").innerText
+            // $('.right').children().remove()
+            // $('.right').append(marked(word))
+            
+            $('.right').html(marked(word))
+        }
+        $("#drawBoard").keyup(showMark)
+       // $("#drawBoard").click(showMark)
+
+    </script>
+</body>
+
+</html>
