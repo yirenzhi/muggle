@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hackerNews</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0;">
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo"></div>
+        </div>
+        <div class="content">
+            <div class="title">Github Trending</div>
+            <div class="articles"></div>
+        </div>
+    </div>
+
+    <script>
+        /* 由同学们完成 */
+        function item(data) {
+            return `<a style="text-decoration:none;" href="${data.url}" ><div class="item">
+                        <h3>${data.name}</h3>
+                        <h5>▲ ${data.points}</h5>
+                    </div></a>`
+        }
+        $.ajax({
+            url: 'https://github-trending-api.now.sh/repositories',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (resp) {
+                for (var e of resp) {
+                    console.log(e)
+                    $('.articles').append(item(e))
+                }
+            }
+        })
+        // var api = "https://github-trending-api.now.sh/repositories"
+
+        // (function () {
+        //     console.log("Ready to Ajax")
+        //     $.ajax({
+        //         url: api,
+        //         type: 'GET',
+        //         dataType: 'JSON',
+        //         success: function (resp, ) {
+        //             console.log("Ajax success.")
+        //             // items(resp)
+        //         },
+        //     })
+        // })()
+    </script>
+</body>
+
+</html>

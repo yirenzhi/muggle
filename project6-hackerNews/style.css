@@ -1,0 +1,40 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #F7F7F7;
+    padding: 1.5vw;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 12.5vw;
+    height: 10vw;
+    background-image: url("//res.cform.cn/unzip/1581643927625_7823370050281042/github_octocat.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.content {
+    width: 85%;
+    padding: 2vw 4vw;
+    background-color: white;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 40vw;
+    height: 6vw;
+    margin: 1vw 0 3vw 0;
+    flex-shrink: 0;
+    font-size: 5vw;
+}
+
