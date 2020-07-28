@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Muggle</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            background: #222A3B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-mock {
+            width: 200px;
+            height: 350px;
+            padding: 80px 30px;
+            background-image: url("https://res.cform.cn/unzip/1582007540266_8497434676253208/source/frame.png");
+            background-size: 100% 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top{
+            height: 20%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title{ 
+            height: 20%;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .input-group {
+            height: 15%;
+            /* width: 50%; */
+            background-color: white;
+            padding: 20px 15px 20px 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: solid 1px lightblue;
+            /* line-height: 1; */
+        }
+        .input {    
+            width: 100%;       
+            overflow: auto;
+            outline: none;
+        }
+        .send {
+            height: 30px;
+            width: 30px;
+            background-image: url('//res.cform.cn/unzip/1584085686109_3878944495157808/send.png');
+            background-size: 100% 100%;
+
+        }
+        .bottom{
+            height: 30%;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+        }
+        .btn {
+
+            -webkit-box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.29);
+            -moz-box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.29);
+            box-shadow: 0px 0px 13px 1px rgba(0, 0, 0, 0.29);
+
+            text-transform:uppercase;
+            border-radius: 5px;
+            border-width: 2px;
+            border-style: solid;
+            background-color: #6AD0FF;
+            padding: 3px 5px 3px 5px;
+            margin-top: 50px;
+            color: white;
+            font-size: larger;
+            font-family: Arial, Helvetica, sans-serif;
+            /* align-self: flex-start; */
+        }
+
+        .text1{
+            /* background-color: blue; */
+            border-radius: 25px;
+            color: rgb(18, 18, 19);
+            padding: 10px 20px 10px 20px;
+            width: 40%;
+            font-weight: bold;
+        }
+
+        .img1{
+            width: 50%;
+            height: 50%;
+            background-image: url('https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinatelecom.png');
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="phone-mock">
+        <div class="top">
+
+
+        </div>
+        <div class="title">
+            <div>手机号归属地查询</div>
+        </div>
+        <div class="input-group">
+            <div contenteditable="" class="input">
+                
+            </div>
+
+        </div>
+        <div class="bottom">
+            <div class="btn inquire">
+                查询
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        var api = "https://tcc.taobao.com/cc/json/mobile_tel_segment.htm"
+        var loading = "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/loading.gif"
+        var carriers = {
+            "中国电信": {
+                "zhName": "电信",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinatelecom.png"
+            },
+            "中国移动": {
+                "zhName": "移动",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinamobile.png"
+            },
+            "中国联通": {
+                "zhName": "联通",
+                "logo": "https://res.cform.cn/unzip/1582007540266_8497434676253208/source/chinaunicom.png"
+            },
+        }
+
+        function showUI(data){
+            $('.top').empty()
+            var text1 = data.carrier
+            var logo = carriers[data.catName]['logo']
+
+            console.log(text1)
+            console.log(logo)
+            $('.top').append(`
+            <div class="text1">${text1}</div>
+            <div style="background-image: url(${logo});" class="img1"></div>
+            `)
+
+        }
+
+        /* 上述是可能用到的素材，请同学们继续补充代码 */
+        function send(msg){
+            console.log(msg);
+            $.ajax({
+                url:api,
+                data:{
+                    "tel":msg
+                },
+                dataType:"jsonp",
+                success:function(resp){
+                    showUI(resp)
+                    // console.log(resp)
+                    
+                }
+            })
+        }
+
+
+        $('.inquire').click(function(){
+            var $text = $('.input').text()
+            send($text);
+
+        })
+    </script>
+</body>
+
+</html>
